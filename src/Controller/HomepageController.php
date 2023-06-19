@@ -13,7 +13,9 @@ class HomepageController extends AbstractController
     #[Route('/hello/{name}', name: 'app_hello')]
     public function __invoke(Request $request, ?string $name = null): JsonResponse
     {
-        $message = sprintf('Hello %s', $name ?? $request->get('name'));
+        $message = sprintf('Hello %s!', $name ?? $request->get('name') ?? 'World');
+
+        dump($request);
 
         return $this->json([
             'message' => $message,
