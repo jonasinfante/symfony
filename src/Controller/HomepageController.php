@@ -4,15 +4,19 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomepageController extends AbstractController
 {
-    #[Route('/homepage', name: 'app_homepage')]
-    public function index(): JsonResponse
+    #[Route('/', name: 'app_homepage')]
+    #[Route('/hello/{name}', name: 'app_hello')]
+    public function __invoke(Request $request, ?string $name = null): JsonResponse
     {
+        $message = sprintf('Hello %s', $name ?? $request->get('name'));
+
         return $this->json([
-            'message' => 'Welcome to your new controller!',
+            'message' => $message,
             'path' => 'src/Controller/HomepageController.php',
         ]);
     }
