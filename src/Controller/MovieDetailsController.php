@@ -8,8 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MovieDetailsController extends AbstractController
 {
-    #[Route('/movie/details/{id}', name: 'app_movie_details',  requirements: ['name' => '\d'])]
-    public function index(int $id): Response
+    #[Route('/movie/details', name: 'app_movie_details')]
+    #[Route('/movie/details/{id}', name: 'app_movie_details',  requirements: ['id' => '\d'])]
+    public function index(int $id = 1): Response
     {
         $movies = [
             [
@@ -67,6 +68,8 @@ class MovieDetailsController extends AbstractController
 
         return $this->render('movie_details/index.html.twig', [
             'movie' => $movie,
+            'prev' => $id > 1 ? $id - 1 : null,
+            'next' => $id < count($movies) ? $id + 1 : null,
         ]);
     }
 }
