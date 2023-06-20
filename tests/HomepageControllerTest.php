@@ -22,7 +22,6 @@ class HomepageControllerTest extends WebTestCase
      */
     public function testTheHelloPageSaysHello(string $urlSuffix, string $expectedHello)
     {
-
         $client = static::createClient();
         $client->request('GET', '/hello' . $urlSuffix);
 
