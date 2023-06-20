@@ -22,7 +22,7 @@ class Movie
     #[ORM\Column]
     private ?\DateTimeImmutable $releasedAt = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $plot = null;
 
     #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'movies')]
@@ -43,11 +43,9 @@ class Movie
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-
-        return $this;
     }
 
     public function getReleasedAt(): ?\DateTimeImmutable
@@ -55,11 +53,9 @@ class Movie
         return $this->releasedAt;
     }
 
-    public function setReleasedAt(\DateTimeImmutable $releasedAt): static
+    public function setReleasedAt(\DateTimeImmutable $releasedAt): void
     {
         $this->releasedAt = $releasedAt;
-
-        return $this;
     }
 
     public function getPlot(): ?string
@@ -67,11 +63,9 @@ class Movie
         return $this->plot;
     }
 
-    public function setPlot(string $plot): static
+    public function setPlot(?string $plot): void
     {
         $this->plot = $plot;
-
-        return $this;
     }
 
     /**
@@ -82,22 +76,18 @@ class Movie
         return $this->genres;
     }
 
-    public function addGenre(Genre $genre): static
+    public function addGenre(Genre $genre): void
     {
         if (!$this->genres->contains($genre)) {
             $this->genres->add($genre);
             $genre->addMovie($this);
         }
-
-        return $this;
     }
 
-    public function removeGenre(Genre $genre): static
+    public function removeGenre(Genre $genre): void
     {
         if ($this->genres->removeElement($genre)) {
             $genre->removeMovie($this);
         }
-
-        return $this;
     }
 }

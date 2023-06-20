@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MovieDetailsController!{% endblock %}
+{% block title %}Hello ListMovieController!{% endblock %}
 
 {% block body %}
 <style>
@@ -9,11 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h2>{{ movie.title }}</h2>
-    {% for genre in movie.genres %}
-        {{ genre.name }}
+    {% for movie in movies %}
+        <p><a href="{{ path('app_movie_details', parameters = {'id': movie.id}) }}">{{ movie.title }}</a></p>
     {%  endfor %}
-    <p>Année : {{ movie.releasedAt|format_datetime("full", "none", locale="fr") }}</p>
-
 </div>
 {% endblock %}

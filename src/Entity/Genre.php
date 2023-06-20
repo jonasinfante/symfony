@@ -36,11 +36,9 @@ class Genre
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -51,19 +49,15 @@ class Genre
         return $this->movies;
     }
 
-    public function addMovie(Movie $movie): static
+    public function addMovie(Movie $movie): void
     {
         if (!$this->movies->contains($movie)) {
             $this->movies->add($movie);
         }
-
-        return $this;
     }
 
-    public function removeMovie(Movie $movie): static
+    public function removeMovie(Movie $movie): void
     {
         $this->movies->removeElement($movie);
-
-        return $this;
     }
 }
