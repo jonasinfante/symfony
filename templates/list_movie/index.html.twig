@@ -10,7 +10,7 @@
 
 <div class="example-wrapper">
     {% for movie in movies %}
-        <p><a href="{{ path('app_movie_details', parameters = {'id': movie.id}) }}">{{ movie.title }}</a></p>
+        <p><a href="{{ path('app_movie_details', {'id': movie.id}) }}">{{ movie.title }}</a></p>
     {%  endfor %}
 </div>
 {% endblock %}

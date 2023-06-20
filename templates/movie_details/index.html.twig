@@ -10,9 +10,12 @@
 
 <div class="example-wrapper">
     <h2>{{ movie.title }}</h2>
+    <p>
+        Genres :
     {% for genre in movie.genres %}
-        {{ genre.name }}
+        {{ genre.name }}{% if not loop.last %}, {% endif %}
     {%  endfor %}
+    </p>
     <p>Année : {{ movie.releasedAt|format_datetime("full", "none", locale="fr") }}</p>
 
 </div>
