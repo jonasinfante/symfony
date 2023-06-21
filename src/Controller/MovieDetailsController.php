@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MovieDetailsController extends AbstractController
 {
-    #[Route('/movie/details/{id}', name: 'app_movie_details',  requirements: ['id' => '\d+'])]
+    #[Route('/movie/details/{id}', name: 'app_movie_details',  requirements: ['id' => '\d+'], defaults: ['page' => 1])]
     public function __invoke(Movie $movie): Response
     {
         return $this->render('movie_details/index.html.twig', [
