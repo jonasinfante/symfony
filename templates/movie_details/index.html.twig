@@ -17,5 +17,9 @@
     {%  endfor %}
     </p>
     <p>Année : {{ movie.releasedAt|format_datetime("full", "none", locale="fr") }}</p>
+    
+    {% if poster %}
+        <img src="{{ poster }}">
+    {%  endif %}
 </div>
 {% endblock %}
