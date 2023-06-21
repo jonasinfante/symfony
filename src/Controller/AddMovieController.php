@@ -8,13 +8,15 @@ use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Tests\Session\Flash\FlashBagTest;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AddMovieController extends AbstractController
 {
+
+    public function __construct(MovieRepository $movieRepository) { }
+
     #[Route('/movie/add', name: 'app_add_movie', methods: ['GET', 'POST'])]
-    public function index(Request $request, MovieRepository $movieRepository): Response
+    public function index(Request $request): Response
     {
         $movie = new Movie();
         $form = $this->createForm(MovieType::class, $movie);
