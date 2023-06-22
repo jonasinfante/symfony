@@ -66,12 +66,9 @@ class ExportMoviesCommand extends Command
 
         $separator = $input->getOption('separator');
 
-
         $f = fopen($file, 'w');
         fputcsv($f, $cols, $separator);
         foreach ($movies as $m) {
-
-
             $csvMovie = array_map(
                 function ($c) use ($m) {
                     $value = $this->accessor->getValue($m, $c);
@@ -81,14 +78,10 @@ class ExportMoviesCommand extends Command
                     if (is_iterable($value)) {
                         return implode(',', array_map(fn(Genre $g) => $g->getName(), $value->toArray()));
                     }
-
-
                     return  $value;
                 },
                 $cols
             );
-
-
             fputcsv($f, $csvMovie, $separator);
         }
 
