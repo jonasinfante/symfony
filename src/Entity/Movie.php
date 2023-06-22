@@ -30,6 +30,10 @@ class Movie
     #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'movies')]
     private Collection $genres;
 
+    #[ORM\ManyToOne(inversedBy: 'movies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $createdBy = null;
+
     public function __construct()
     {
         $this->genres = new ArrayCollection();
@@ -91,5 +95,17 @@ class Movie
         if ($this->genres->removeElement($genre)) {
             $genre->removeMovie($this);
         }
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): static
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
     }
 }

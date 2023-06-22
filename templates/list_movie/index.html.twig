@@ -10,7 +10,11 @@
 
 <div class="example-wrapper">
     {% for movie in movies %}
-        <p><a href="{{ path('app_movie_details', {'id': movie.id}) }}">{{ movie.title }}</a></p>
+    <div>
+        <p><a href="{{ path('app_movie_details', {'id': movie.id}) }}">{{ movie.title }}</a>
+        {% if is_granted('delete', movie) %}<a href="{{ path('app_movie_delete', {'id': movie.id}) }}"> - DELETE</a>{% endif %}
+        </p>
+    </div>
     {%  endfor %}
 </div>
 {% endblock %}

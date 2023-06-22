@@ -21,6 +21,7 @@ class AddMovieController extends AbstractController
     public function index(Request $request): Response
     {
         $movie = new Movie();
+        $movie->setCreatedBy($this->getUser());
         $form = $this->createForm(MovieType::class, $movie);
         $form->handleRequest($request);
 
