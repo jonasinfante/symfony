@@ -23,7 +23,6 @@ class CacheableOmdbGateway extends OmdbGateway
         return $this->cache->get(
             $cacheKey,
             function (ItemInterface $cacheItem) use ($title): ?string  {
-                $cacheItem->expiresAfter(10);
                 return $this->omdbGateway->getPoster($title);
             }
         );
