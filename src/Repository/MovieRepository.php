@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Movie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -63,4 +64,13 @@ class MovieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findByGenresNames(array $genreNames): array
+    {
+        return $this->createQueryBuilder('movie')
+            ->join('movie.genres', 'genre')
+            ->andWhere('LOWER(genre.name) IN  (:genreNames)')
+            ->setParameter('genreNames', array_map(strtolower(...), $genreNames))
+            ->getQuery()
+            ->getResult();
+    }
 }
